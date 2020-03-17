@@ -14,8 +14,7 @@ export default class App extends React.Component {
     super(props);
 
     this.state = {
-      videos: [],
-      currentVideo: null
+      videos: []
     };
   }
 
@@ -27,19 +26,19 @@ export default class App extends React.Component {
     this.setState({currentVideo: video});
   }
 
-  getYouTubeVideos(query) {
-    var options = {
-      key: this.props.API_KEY,
-      query: query
-    };
+getYouTubeVideos(query) {
+  var options = {
+    key: this.props.API_KEY,
+    query: query
+  };
 
-    this.props.searchYouTube(options, (videos) =>
-      this.setState({
-        videos: videos,
-        currentVideo: videos[0]
-      })
-    );
-  }
+  this.props.searchYouTube(options, (videos) =>
+    this.setState({
+      videos: videos,
+      currentVideo: videos[0]
+    })
+  );
+}
 
   //TODO: swap out the React components below for the container components
   //  you wrote in the 'containers' directory.
@@ -49,11 +48,10 @@ export default class App extends React.Component {
         <Nav handleSearchInputChange={this.getYouTubeVideos.bind(this)}/>
         <div className="row">
           <div className="col-md-7">
-            <VideoPlayer video={this.state.currentVideo}/>
+            <VideoPlayerContainer/>
           </div>
           <div className="col-md-5">
-            <VideoList
-              handleVideoListEntryTitleClick={this.handleVideoListEntryTitleClick.bind(this)}
+            <VideoListContainer
               videos={this.state.videos}
             />
           </div>
